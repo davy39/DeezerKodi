@@ -1,6 +1,6 @@
 import xbmcgui
 import xbmcplugin
-
+import xbmcvfs
 from app.actions.base_actions import BaseActions
 from app.http import Api
 from lib.helpers.logger import Logger
