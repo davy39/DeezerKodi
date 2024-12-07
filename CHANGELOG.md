@@ -1,5 +1,16 @@
 # Changelog
 
+
+## v3.0.0
+
+### [Breaking changes]
+
+- Added auth from https://connect.deezer.com/oauth/user_auth.php
+- Added API from https://www.deezer.com/ajax/gw-light.php for getting track tokens
+- Added getting streams from https://media.deezer.com/v1/get_url
+- Added streams decryption
+- Now working with free tiers
+
 ## v2.0.5
 
 ### [Fix]
