@@ -17,14 +17,19 @@ class TracksActions(BaseActions):
         :param identifiant: ID of the track to stream
         :return: track's stream url
         """
+        # Get stream url
         url = Api.instance().request_streaming(identifiant)
-
         if url.startswith('http'):
-            Logger.debug("Playing track " + identifiant)
-            item = xbmcgui.ListItem(path=url)
+            # Create a path to download stream       
+            path = xbmcvfs.translatePath(f'special://temp/{identifiant}')
+            # Download and decrypt stream
+            Api.instance().dl_track(identifiant, url, path)
+            # Create an item to give to kodi's player
+            item = xbmcgui.ListItem(path=path)
+            # Send the item to Kodi's player
             xbmcplugin.setResolvedUrl(cls.app.args().addon_handle, True, listitem=item)
         else:
-            Logger.warn("Unplayable track " + identifiant)
+            Logger.warn("Unable to get url of track " + identifiant)
             xbmcgui.Dialog().notification(
                 "Unplayable track",
                 "Track " + identifiant + " cannot be played.",
@@ -32,5 +37,4 @@ class TracksActions(BaseActions):
                 sound=False
             )
             xbmcplugin.setResolvedUrl(cls.app.args().addon_handle, False, xbmcgui.ListItem())
-
         return []
