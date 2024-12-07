@@ -22,8 +22,9 @@ class Api(object):
 
     _API_BASE_URL = "http://api.deezer.com/2.0/{service}/{id}/{method}"
     _API_BASE_STREAMING_URL = "http://tv.deezer.com/smarttv/streaming.php"
-    _API_AUTH_URL = "http://tv.deezer.com/smarttv/authentication.php"
-
+    _API_AUTH_URL = "https://connect.deezer.com/oauth/user_auth.php"
+    _CLIENT_ID = "447462"
+    _CLIENT_SECRET = "a83bf7f38ad2f137e444727cfc3775cf"
     __CACHE_FILE = xbmcvfs.translatePath('special://temp/deezer-api.pickle')
 
     __INSTANCE = None
@@ -47,7 +48,7 @@ class Api(object):
                 Logger.debug("Api instance not saved, trying to get token ...")
 
                 cls.__INSTANCE = cls(
-                    Settings.get('username'),
+                    Settings.get('email'),
                     Settings.get('password')
                 )
             except LoadedCredentialsException:
@@ -55,7 +56,7 @@ class Api(object):
                 cls.clean_cache()
 
                 cls.__INSTANCE = cls(
-                    Settings.get('username'),
+                    Settings.get('email'),
                     Settings.get('password')
                 )
 
@@ -68,22 +69,22 @@ class Api(object):
         xbmcvfs.delete(Api.__CACHE_FILE)
         cls.__INSTANCE = None
 
-    def __init__(self, username: str, password: str):
+    def __init__(self, email: str, password: str):
         """
-        Instantiate a Connection object from username and password.
+        Instantiate a Connection object from email and password.
 
-        :param str username: The user's name
+        :param str email: The user's email
         :param str password: The user's password
         :raise EmptyCredentialsException: If the credentials are empty
         """
         Logger.debug("Creating new API connection ...")
-        self._username = username
+        self._email = email
         self._password = ""
         self.set_password(password)
         self._access_token = None
 
         if self.empty_credentials():
-            raise EmptyCredentialsException("Username and password are required!")
+            raise EmptyCredentialsException("email and password are required!")
 
         self._obtain_access_token()
 
@@ -119,7 +120,7 @@ class Api(object):
             cls = pickle.load(file)
 
         if cls.empty_credentials(check_token=True):
-            raise LoadedCredentialsException("Loaded empty username or password")
+            raise LoadedCredentialsException("Loaded empty email or password")
 
         return cls
 
@@ -130,7 +131,7 @@ class Api(object):
         :param check_token: Tells wether or not to check the access token
         :return: True if any credential is empty, False if there are all filled
         """
-        empty_creds = self._username == "" or self._password == ""
+        empty_creds = self._email == "" or self._password == ""
         empty_tok = False
 
         if check_token:
@@ -143,15 +144,10 @@ class Api(object):
         Obtain access token by pretending to be a smart tv.
         """
         Logger.debug("Connection: Getting access token from API ...")
-
-        response = requests.get(self._API_AUTH_URL, params={
-            'login': self._username,
-            'password': self._password,
-            'device': 'panasonic'
-        }).json()
-
+        hashed_params = hashlib.md5(f'{self._CLIENT_ID}{self._email}{self._password}{self._CLIENT_SECRET}'.encode('utf-8')).hexdigest()
+        url = f'{self._API_AUTH_URL}?app_id={self._CLIENT_ID}&login={self._email}&password={self._password}&hash={hashed_params}'
+        response = requests.get(url).json()
         Api.check_error(response)
-
         self._access_token = response['access_token']
 
     def request(
