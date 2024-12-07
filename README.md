@@ -1,11 +1,11 @@
 # DeezerKodi
 
 This is an unofficial Deezer addon for Kodi.  
-It works **only for premium account** (Deezer API doesn't allow streaming for free accounts).
+It works with all kind of deezer accounts.  
+Streaming is limited to 128kb/s for free accounts, but can play up to flac for premium's.  
 This addon works for personal and family accounts (profiles are usable).  
 It supports access to your playlists. Searching for tracks, albums and artists is also implemented.
 Let me know if there is a particular feature you want to see implemented.  
-Tracks are played in 128kb resolution as that's the max available bitrate for TVs from Deezer.
 
 # Installation
 
@@ -50,3 +50,5 @@ new [issue](https://github.com/Valentin271/DeezerKodi/issues).
 This addon is forked from [kubatek94](https://github.com/kubatek94)'
 s [DeezerKodi repo](https://github.com/kubatek94/DeezerKodi).
 Only the streaming API, icon and fanart have been reused.
+
+Auth and decryption are adapted from [orpheusdl-deezer](https://github.com/TheKVT/orpheusdl-deezer).
