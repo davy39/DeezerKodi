@@ -21,7 +21,7 @@ class TracksActions(BaseActions):
         url = Api.instance().request_streaming(identifiant)
         if url.startswith('http'):
             # Create a path to download stream       
-            path = xbmcvfs.translatePath(f'special://temp/{identifiant}')
+            path = xbmcvfs.translatePath(f'special://temp/deezer-temp.mp3')
             # Download and decrypt stream
             Api.instance().dl_track(identifiant, url, path)
             # Create an item to give to kodi's player
