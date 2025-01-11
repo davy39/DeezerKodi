@@ -360,12 +360,12 @@ class Api(object):
         track_token = t_data['TRACK_TOKEN']
         track_token_expiry = t_data['TRACK_TOKEN_EXPIRE']
         format = self.available_formats[-1]
-        md5_origin = t_data['MD5_ORIGIN']
+        md5_origin = t_data.get('MD5_ORIGIN')
         media_version = t_data['MEDIA_VERSION']
-        if format in ('MP3_320', 'FLAC'):
-            url = self.get_track_url(id, track_token, track_token_expiry, format)
-        else:
+        if format not in ('MP3_320', 'FLAC') and md5_origin:
             url = self.get_legacy_track_url(md5_origin, format, id, media_version)
+        else:
+            url = self.get_track_url(id, track_token, track_token_expiry, format)
 
         return url
 
