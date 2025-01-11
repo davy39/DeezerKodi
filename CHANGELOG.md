@@ -1,5 +1,12 @@
 # Changelog
 
+## v3.0.2
+
+### [Fix]
+
+- Temporary muzic file is now special://temp/deezer-temp.mp3
+
+
 
 ## v3.0.1
 
