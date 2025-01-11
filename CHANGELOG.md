@@ -1,6 +1,13 @@
 # Changelog
 
 
+## v3.0.1
+
+### [Fix]
+
+- Fixed streaming 128kbps when no MD5 for legacy
+
+
 ## v3.0.0
 
 ### [Breaking changes]
