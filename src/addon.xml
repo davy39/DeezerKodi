@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.audio.deezer" name="Deezer" version="3.0.2" provider-name="Valentin271">
+<addon id="plugin.audio.deezer" name="Deezer" version="3.0.3" provider-name="Davy39">
 
     <requires>
 	    <import addon="xbmc.python" version="3.0.0"/>
@@ -10,17 +10,17 @@
         <provides>audio</provides>
     </extension>
 
-    <extension point="xbmc.addon.repository" name="Valentin271's Kodi repo">
+    <extension point="xbmc.addon.repository" name="Davy39's Kodi repo">
         <dir>
-            <info>https://raw.githubusercontent.com/Valentin271/DeezerKodi/master/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/Valentin271/DeezerKodi/master/addons.xml.md5</checksum>
+            <info>https://raw.githubusercontent.com/Davy39/DeezerKodi/master/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/Davy39/DeezerKodi/master/addons.xml.md5</checksum>
             <hashes>md5</hashes>
         </dir>
     </extension>
 
     <extension point="xbmc.addon.metadata">
         <summary lang="en">This addon allows you to listen to music from Deezer.</summary>
-        <description lang="en">This addon allows you to stream music from Deezer. You can browse your playlists and loved tracks, search for tracks, artists and albums. A premium account is REQUIRED.</description>
+        <description lang="en">This addon allows you to stream music from Deezer. You can browse your playlists and loved tracks, search for tracks, artists and albums.</description>
         <disclaimer lang="en">This addon was not provided by Deezer.</disclaimer>
 	    <news>
 - Fixed login and streaming (2024)
@@ -29,9 +29,9 @@
         <platform>all</platform>  <!-- Not tested -->
         <language>en</language>
         <license>GPL-3.0</license>
-        <forum>https://github.com/Valentin271/DeezerKodi/issues</forum>
-        <website>https://github.com/Valentin271/DeezerKodi</website>
-        <source>https://github.com/Valentin271/DeezerKodi/tree/master/src</source>
+        <forum>https://github.com/Davy39/DeezerKodi/issues</forum>
+        <website>https://github.com/Davy39/DeezerKodi</website>
+        <source>https://github.com/Davy39/DeezerKodi/tree/master/src</source>
         <email></email>
         <assets>
             <icon>resources/icon.png</icon>

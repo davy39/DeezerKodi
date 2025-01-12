@@ -1,5 +1,15 @@
 # Changelog
 
+
+
+## v3.0.3
+
+### [Fix]
+
+- Change pickle path to addon directory
+
+
+
 ## v3.0.2
 
 ### [Fix]
