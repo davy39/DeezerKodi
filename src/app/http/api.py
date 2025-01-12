@@ -30,7 +30,7 @@ class Api(object):
     _API_BASE_GW_URL = 'https://www.deezer.com/ajax/gw-light.php'
     _CLIENT_ID = "447462"
     _CLIENT_SECRET = "a83bf7f38ad2f137e444727cfc3775cf"
-    __CACHE_FILE = xbmcvfs.translatePath('special://home/addons/plugin.audio.deezer/deezer-api.pickle')
+    __CACHE_FILE = xbmcvfs.translatePath('special://profile/addon_data/plugin.audio.deezer/deezer-api.pickle')
 
     __INSTANCE = None
 
